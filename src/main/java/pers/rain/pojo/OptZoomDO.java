@@ -1,6 +1,7 @@
 package pers.rain.pojo;
 
 /**
+ * 缩放页面对应的类
  * @Auther: W-CH
  * @Time: 2022-12-20 20:52
  * @E-mail: wang.xiaohong.0817@gmail.com

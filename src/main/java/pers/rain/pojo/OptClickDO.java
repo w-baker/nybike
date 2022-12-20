@@ -1,5 +1,14 @@
 package pers.rain.pojo;
 
+
+/**
+ * 点击事件对应的类
+ *@Time     :2022/12/23 09:32
+ *@Auther   :CH-Wang
+ *@E-mail   :wang.xiaohong.0817@gamil.com
+ *@File     :OptClickDO.java
+ *@Software :IntelliJ IDEA
+ */
 public class OptClickDO extends OptBaseDO{
     private String stationId;
     private String stationName;

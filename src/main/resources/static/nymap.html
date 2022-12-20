@@ -30,22 +30,69 @@
     // 标记当前是否正在使用大图标
     var isBigIconFlag=true;
 
+    var dragStartCenter = null;
+    var dragEndCenter = null;
+    // 覆盖物拖拽开始事件
+    map.addEventListener('dragstart', function () {
+        dragStartCenter = map.getCenter(); // 获取地图中心点
+    });
+    // 覆盖物拖拽事件
+    map.addEventListener('dragend', function () {
+        dragEndCenter = map.getCenter(); // 获取地图中心点
+
+        // 采集用户点击站点的行为数据
+        const param = {
+            "optType": 2,              // 操作类型
+            "dragStartLat": dragStartCenter.lat,
+            "dragStartLon":dragStartCenter.lng,
+			"dragEndLat":dragEndCenter.lat,
+			"dragEndLon":dragEndCenter.lng
+        };
+
+        const url = "opt/save";
+        // 使用jquery向服务器发送用户点击行为的数据
+        // 参数分别是：请求路径，要发送的参数，服务器返回结果的回调函数
+        $.post(url, param, function (result) {
+            console.log(result);
+        });
+    });
+
+
+    // 添加开始缩放监听
+    map.addEventListener("zoomstart",function () {
+        map.zoomStartLevel = map.getZoom()
+    })
     // 为地图添加缩放终止事件监听
     map.addEventListener("zoomend",function(){
         // 获取当前的缩放级别
         var zoomLevel=map.getZoom();
+
+        map.zoomEndLevel = map.getZoom()
         if (zoomLevel>=15 && isBigIconFlag==false){
-            alert("切换到大图标");
+            // alert("切换到大图标");
             // 切换的操作
             smallToBigBikeIcon();
             isBigIconFlag=true; //标记当前在使用大图标
         }
         if (zoomLevel<15 && isBigIconFlag){
-            alert("切换到小图标");
+            // alert("切换到小图标");
             // 切换的操作
             bigBikeIconToSmall();
             isBigIconFlag=false; //标记当前在使用小图标
         }
+
+        // 采集用户点击站点的行为数据
+        const param = {
+            "optType": 1,              // 操作类型
+            "zoomStartLevel": map.zoomStartLevel,
+            "zoomEndLevel":map.zoomEndLevel
+        };
+        const url = "opt/save";
+        // 使用jquery向服务器发送用户点击行为的数据
+        // 参数分别是：请求路径，要发送的参数，服务器返回结果的回调函数
+        $.post(url, param, function (result) {
+            console.log(result);
+        });
     })
 
 
@@ -163,10 +210,23 @@
         marker.sid=id;
         // 为marker添加点击事件
         marker.addEventListener("click",function(){
-            // alert("click");
             var iwData=infoWindowMap.get(this.sid);
             var infoWindow=getInfoWindow(iwData.name,iwData.nba-iwData.nea,iwData.nda,iwData.shortName);
             this.openInfoWindow(infoWindow);
+
+            // 采集用户点击站点的行为数据
+            const param = {
+                "optType": 0,            // 操作类型
+                "stationId": this.sid,   // 站点id
+                "stationName": iwData.name   // 站点名称
+            };
+
+            const url = "opt/save";
+            // 使用jquery向服务器发送用户点击行为的数据
+            // 参数分别是：请求路径，要发送的参数，服务器返回结果的回调函数
+            $.post(url, param, function (result) {
+                console.log(result);
+            });
         })
 
         // 将marker对象添加到数组中
@@ -232,20 +292,20 @@
     </div>
     <div class='mapbox-content-detail'>
         <div class='mapbox-content-detail-bikes-available'>
-            <span class='mapbox-content-detail-bikes-available-val'> 
+            <span class='mapbox-content-detail-bikes-available-val'>
                 [nba]
             </span>
             <span class='mapbox-content-detail-bikes-available-lbl'>Bikes</span>
         </div>
         <div class='mapbox-content-detail-docks-available'>
-            <span class='mapbox-content-detail-docks-available-val'> 
+            <span class='mapbox-content-detail-docks-available-val'>
                 [nda]
             </span>
             <span class='mapbox-content-detail-docks-available-lbl'>Docks</span>
         </div>
     </div>
     <div class='mapbox-content-footer'>
-        <span class='mapbox-content-footer-shortName'> 
+        <span class='mapbox-content-footer-shortName'>
             Bike station: [info_shortName]
         </span>
     </div>

@@ -5,9 +5,10 @@ import java.util.Date;
 import java.util.Objects;
 
 public class OperationDO {
-public static final int OPT_TYPE_CLICK = 0;
-public static final int OPT_TYPE_ZOOM = 1;
-public static final int OPT_TYPE_DRAG = 2;
+
+    public static final int OPT_TYPE_CLICK = 0;
+    public static final int OPT_TYPE_ZOOM = 1;
+    public static final int OPT_TYPE_DRAG = 2;
 
     private Integer id;
         // 包装类 Integer 和 int 值的区别

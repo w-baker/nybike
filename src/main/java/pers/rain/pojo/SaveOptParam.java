@@ -1,7 +1,13 @@
 package pers.rain.pojo;
 
-// 用于接收浏览器发送请求中的 参数数据
-// 当前类在OperationController中使用
+/**
+ * 用于接收浏览器发送请求中的 参数数据,当前类在OperationController中使用
+ *@Time     :2022/12/23 09:33
+ *@Auther   :CH-Wang
+ *@E-mail   :wang.xiaohong.0817@gamil.com
+ *@File     :SaveOptParam.java
+ *@Software :IntelliJ IDEA
+ */
 public class SaveOptParam {
 
     private Integer optType; // 操作类型：0-点击  1-绽放 2-拖拽

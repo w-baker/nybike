@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!-- 配置文件的根标签是 mapper，表示当前文档用于声明映射关系的
+    所谓的映射是指：将 JVM中对象 ==> DB中的记录
+                    将 DB中的记录 ==> JVM中对象 -->
+<!-- namespace用于声明 针对哪个持久层接口，进行SQL操作的配置映射 -->
+<mapper namespace="pers.rain.dao.OperationDAO">
+
+	<!-- 保存一条用户行为记录 -->
+	<!-- int insertOperation(OperationDO optDO); -->
+	<!-- id用于声明 针对 哪个方法进行实现 -->
+	<insert id="insertOperation" parameterType="pers.rain.pojo.OperationDO"
+			useGeneratedKeys="true" keyProperty="id">
+		insert into t_operation_v2 (opt_type, user_ip, created_time)
+		values (#{optType}, #{userIp}, #{createdTime})
+	</insert>
+
+	<!-- 保存一条点击详情记录 -->
+	<!-- int insertOptClick(OptClickDO clickDO); -->
+	<insert id="insertOptClick" parameterType="pers.rain.pojo.OptClickDO">
+		insert into t_opt_click (opt_id, station_id, station_name)
+		values (#{optId}, #{stationId}, #{stationName})
+	</insert>
+	<insert id="insertOptDrag" parameterType="pers.rain.pojo.OptDragDO">
+		insert into t_opt_drag(opt_id, drag_start_lat, drag_start_lon, drag_end_lat, drag_end_lon)
+		values (#{optId}, #{dragStartLat}, #{dragStartLon}, #{dragEndLat}, #{dragEndLon})
+	</insert>
+	<insert id="insertOptZoom" parameterType="pers.rain.pojo.OptZoomDO">
+		insert into t_opt_zoom(opt_id, zoom_start_level, zoom_end_level)
+		values (#{optId}, #{zoomStartLevel}, #{zoomEndLevel})
+	</insert>
+
+</mapper>
