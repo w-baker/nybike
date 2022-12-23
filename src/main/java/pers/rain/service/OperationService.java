@@ -6,6 +6,8 @@ import pers.rain.dao.OperationDAO;
 import pers.rain.pojo.*;
 import pers.rain.util.IPUtils;
 
+import java.util.Date;
+
 // 使用注解声明当前类是业务层的类
 @Service
 public class OperationService {
@@ -24,6 +26,8 @@ public class OperationService {
         String userIP = IPUtils.getIpAddr();
         // 将IP地址，保存到optDO中
         optDO.setUserIp(userIP);
+        
+        optDO.setCreatedTime(new Date());
         // 调用持久层方法，添加操作记录
         int row1 = dao.insertOperation(optDO);
         // 判断添加是否失败
