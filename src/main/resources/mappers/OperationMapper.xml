@@ -30,5 +30,11 @@
 		insert into t_opt_zoom(opt_id, zoom_start_level, zoom_end_level)
 		values (#{optId}, #{zoomStartLevel}, #{zoomEndLevel})
 	</insert>
-
+	<select id="getUserOpt" resultType="java.util.HashMap">
+		SELECT opt_type optType,
+			   COUNT(*) count
+		FROM t_operation_v2
+		GROUP BY opt_type
+		ORDER BY COUNT(*) DESC;
+	</select>
 </mapper>

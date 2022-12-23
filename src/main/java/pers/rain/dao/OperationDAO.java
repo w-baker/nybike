@@ -6,6 +6,9 @@ import pers.rain.pojo.OptClickDO;
 import pers.rain.pojo.OptDragDO;
 import pers.rain.pojo.OptZoomDO;
 
+import java.util.HashMap;
+import java.util.List;
+
 /**
  * 用户行为数据 的 持久层接口
  */
@@ -39,5 +42,7 @@ public interface OperationDAO {
      * @return
      */
     int insertOptDrag(OptDragDO dragDO);
+    
+    List<HashMap<Integer,Integer>> getUserOpt();
 
 }

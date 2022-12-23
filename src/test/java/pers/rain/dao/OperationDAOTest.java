@@ -6,6 +6,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import pers.rain.pojo.OperationDO;
 import pers.rain.pojo.OptClickDO;
 
+import java.util.HashMap;
+import java.util.List;
+
 @SpringBootTest
 public class OperationDAOTest {
 
@@ -37,5 +40,11 @@ public class OperationDAOTest {
         OptClickDO clickDO = new OptClickDO(1,"7789","Test Station");
         int row = dao.insertOptClick(clickDO);
         System.out.println("row: " + row);
+    }
+    
+    @Test
+    public void test(){
+        List<HashMap<Integer, Integer>> list = dao.getUserOpt();
+        list.forEach(System.out::println);
     }
 }
