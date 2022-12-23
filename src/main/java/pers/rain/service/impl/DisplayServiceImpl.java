@@ -99,6 +99,18 @@ public class DisplayServiceImpl implements DisplayService {
             for (HashMap<String, Integer> hashMap : list) {
             
                 String key = String.valueOf(hashMap.get("rideableType"));
+                switch (key){
+                    case "classic_bike":
+                        key = "经典";
+                        break;
+                    case "electric_bike":
+                        key = "电车";
+                        break;
+                    case "docked_bike":
+                        key = "停靠";
+                        break;
+                }
+                
                 Integer value =Integer.parseInt(String.valueOf(hashMap.get("count")));
             
                 map.put(key, value);
