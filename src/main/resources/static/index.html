@@ -97,6 +97,7 @@
             // 标记当前是否正在使用大图标
             var isBigIconFlag = true;
 
+
             var dragStartCenter = null;
             var dragEndCenter = null;
 
@@ -121,8 +122,8 @@
                 // 使用jquery向服务器发送用户点击行为的数据
                 // 参数分别是：请求路径，要发送的参数，服务器返回结果的回调函数
                 $.post(url, param, function (result) {
-                    char2();
                     console.log(result);
+                    char2();
                 });
             });
 
