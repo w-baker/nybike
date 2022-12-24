@@ -6,7 +6,6 @@ import pers.rain.dao.DisplayDao;
 import pers.rain.dao.OperationDAO;
 import pers.rain.pojo.OperationDO;
 import pers.rain.service.DisplayService;
-import pers.rain.util.MapUtils;
 
 import java.util.*;
 
@@ -29,7 +28,8 @@ public class DisplayServiceImpl implements DisplayService {
         List<HashMap<String, Integer>> list = displayDao.getStartStationTop5();
         
         Map<String, Integer> map = new LinkedHashMap<>();
-
+        
+        // 将字典列表转换为字典
         if (list != null && !list.isEmpty()) {
             for (HashMap<String, Integer> hashMap : list) {
 
@@ -82,6 +82,7 @@ public class DisplayServiceImpl implements DisplayService {
                         break;
                 }
                 
+                //获取值
                 value = Integer.parseInt(String.valueOf(hashMap.get("count")));
                 
                 map.put(key, value);
@@ -98,6 +99,7 @@ public class DisplayServiceImpl implements DisplayService {
         if (list != null && !list.isEmpty()) {
             for (HashMap<String, Integer> hashMap : list) {
             
+                // 根据查询到的类型生成对应的值
                 String key = String.valueOf(hashMap.get("rideableType"));
                 switch (key){
                     case "classic_bike":
